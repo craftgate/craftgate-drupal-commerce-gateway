@@ -1,0 +1,7 @@
+name: Commerce Craftgate
+type: module
+description: 'Provides Commerce integration for Craftgate Payments.'
+package: Commerce (contrib)
+core_version_requirement: ^8.8 || ^9
+dependencies:
+  - commerce:commerce_payment
