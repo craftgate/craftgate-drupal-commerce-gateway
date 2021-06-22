@@ -3,12 +3,11 @@
 namespace Drupal\commerce_craftgate\PluginForm\Craftgate;
 
 use Drupal\commerce_payment\PluginForm\PaymentRefundForm as BasePaymentRefundForm;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\commerce_price\Price;
+use Drupal\Core\Form\FormStateInterface;
 
 class PaymentRefundForm extends BasePaymentRefundForm
 {
-
     /**
      * {@inheritdoc}
      */
@@ -68,7 +67,7 @@ class PaymentRefundForm extends BasePaymentRefundForm
         $transactionCount = 0;
         foreach ($values['transactions'] as $transaction) {
             if ($transaction['refund'] ?? false) {
-                $transactionCount +=1;
+                $transactionCount += 1;
             }
         }
         if ($transactionCount != 1) {
