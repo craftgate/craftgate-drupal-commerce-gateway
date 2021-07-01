@@ -39,7 +39,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class Craftgate extends OffsitePaymentGatewayBase implements SupportsRefundsInterface
 {
-
     public $craftgateClient;
 
     public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, PaymentTypeManager $payment_type_manager, PaymentMethodTypeManager $payment_method_type_manager, TimeInterface $time)
@@ -103,6 +102,10 @@ class Craftgate extends OffsitePaymentGatewayBase implements SupportsRefundsInte
             throw new PaymentGatewayException(t("Post data didn't have 'token' information."));
         }
         $response = json_decode($this->craftgateClient->payment()->retrieveCheckoutPayment($token));
+        if (!isset($response->conversationId) || $response->conversationId != $order->id()) {
+            throw new PaymentGatewayException(t('Your payment could not be processed.'));
+        }
+
         if ($response->errors ?? false) {
             throw new PaymentGatewayException($response->errors->errorDescription);
         }
@@ -129,8 +132,8 @@ class Craftgate extends OffsitePaymentGatewayBase implements SupportsRefundsInte
     public function refundPayment(PaymentInterface $payment, ?Price $amount = NULL)
     {
         // Craftgate only allows refund by order item/transaction so the specified order item/transaction must be sent.
-        // In order to achive that we provide another method called refundPaymentByTransaction and perform refund there.
-        // Also PaymentRefundForm is overriden to use refundPaymentByTransaction method
+        // In order to achieve that we provide another method called refundPaymentByTransaction and perform refund there.
+        // Also PaymentRefundForm is overridden to use refundPaymentByTransaction method
     }
 
     public function refundPaymentByTransaction(PaymentInterface $payment, $transaction)
