@@ -30,7 +30,7 @@ class PaymentForm extends BasePaymentOffsiteForm
         $request = array(
             'price' => number_format($totalPrice->getNumber(), 2),
             'paidPrice' => number_format($totalPrice->getNumber(), 2),
-            'paymentGroup' => \Craftgate\Model\PaymentGroup::PRODUCT,
+            'paymentGroup' => \Craftgate\Model\PaymentGroup::LISTING_OR_SUBSCRIPTION,
             'currency' => $totalPrice->getCurrencyCode(),
             'conversationId' => $order->id(),
             'callbackUrl' => $form['#return_url'],
