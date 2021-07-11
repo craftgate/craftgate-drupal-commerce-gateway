@@ -1,0 +1,10 @@
+{
+    "name": "drupal/commerce_craftgate",
+    "type": "drupal-module",
+    "description": "Provides Commerce integration for Craftgate.",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/commerce": "^2.19",
+        "craftgate/craftgate": "^1.0.4"
+    }
+}

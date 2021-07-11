@@ -24,5 +24,14 @@ Craftgate, bulut tabanlı ödeme geçidi ile işletmenize ait tüm bankaların S
 ### Gereksinimler
 Craftgate kullanarak ödeme geçirebilmek için üyeliğinizin olması gerekmektedir.
 
+### Kurulum
+#### Drupal'a manuel modül yüklenmesi
+* Repodan klasör olarak indirilen modül Drupal içerisinde yer alan "web/modules/custom" klasörüne kopyalanır. 
+* Kurulum composer ile olmadığı için craftgate/craftgate kütüphanesi gerekeceğinden Drupal ana dizininde "composer require craftgate/craftgate" ile yüklenmesi gerekmektedir.
+
+#### Drupal'a drupal.org üzerinden modül yüklenmesi
+* Modül drupal.org'a yüklendikten sonra composer ile modül yüklenebilmektedir. 
+* drupal.org üzerinde modülün adı "commerce_craftgate" olduğu için "composer require drupal/commerce_craftgate" ile modülün kuruluma eklenmesi sağlanabilir. (örnek olarak modül drupal.org'a yüklenmeden "composer require drupal/commerce_paypal" komutu ile commerce_paypal modülü yüklenip test edilebilir)
+
 ### Geliştiriciler
 Drupal Commerce 2.x eklentisi [Bidolubaskı](https://github.com/bidolubaski) tarafından geliştirilmiştir ve artık Craftgate tarafından bakımı yapılmaktadır.
