@@ -102,12 +102,12 @@ class Craftgate extends OffsitePaymentGatewayBase implements SupportsRefundsInte
             throw new PaymentGatewayException(t("Post data didn't have 'token' information."));
         }
         $response = json_decode($this->craftgateClient->payment()->retrieveCheckoutPayment($token));
-        if (!isset($response->conversationId) || $response->conversationId != $order->id()) {
-            throw new PaymentGatewayException(t('Your payment could not be processed.'));
-        }
 
         if ($response->errors ?? false) {
             throw new PaymentGatewayException($response->errors->errorDescription);
+        }
+        if (!isset($response->data->conversationId) || $response->data->conversationId != $order->id()) {
+            throw new PaymentGatewayException(t('Your payment could not be processed.'));
         }
         if ($response->data->paymentStatus != 'SUCCESS') {
             throw new PaymentGatewayException(t('Payment status of @status is not expected.', ['@status' => $response->data->paymentStatus]));
